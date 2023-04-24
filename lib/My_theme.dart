@@ -10,8 +10,9 @@ class MyThemeData {
       scaffoldBackgroundColor: Colors.transparent,
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
+          elevation: 0,
+          centerTitle: true,
+          iconTheme: IconThemeData(color: colorBlack)),
       textTheme: TextTheme(
         headline1: TextStyle(
             fontSize: 25, fontWeight: FontWeight.bold, color: Colors.black),

@@ -3,6 +3,7 @@ import 'package:islamy/My_theme.dart';
 import 'package:islamy/Quran.dart';
 import 'package:islamy/hadeth.dart';
 import 'package:islamy/home_screen.dart';
+import 'package:islamy/quran_tab/sura_page.dart';
 import 'package:islamy/radio.dart';
 import 'package:islamy/settings.dart';
 import 'package:islamy/tasbih.dart';
@@ -23,7 +24,8 @@ class islamiApp extends StatelessWidget {
         hadeth.routeName: (context) => hadeth(),
         tasbih.routeName: (context) => tasbih(),
         radio.routeName: (context) => radio(),
-        settings.routeName: (context) => settings()
+        settings.routeName: (context) => settings(),
+        suraPage.routeName: (context) => suraPage(),
       },
       theme: MyThemeData.lightTheme,
       darkTheme: MyThemeData.darkTheme,

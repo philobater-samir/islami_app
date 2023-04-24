@@ -149,7 +149,10 @@ class Quran extends StatelessWidget {
                 );
               },
               itemBuilder: (context, index) {
-                return suraName(text: names[index]);
+                return suraName(
+                  text: names[index],
+                  index: index,
+                );
               },
               itemCount: names.length,
             ),
