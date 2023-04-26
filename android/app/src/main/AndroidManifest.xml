@@ -2,7 +2,7 @@
     package="com.example.islamy">
 
     <application
-        android:label="Islam app"
+        android:label="Islami"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Quran extends StatelessWidget {
-  static const String routeName = 'Quran';
+class settings extends StatelessWidget {
+  static const String routeName = 'setting';
 
   @override
   Widget build(BuildContext context) {
