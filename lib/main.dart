@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islamy/My_theme.dart';
-import 'package:islamy/Quran.dart';
-import 'package:islamy/hadeth.dart';
+import 'package:islamy/hadeth_tab/hadeth.dart';
+import 'package:islamy/hadeth_tab/hadeth_page.dart';
 import 'package:islamy/home_screen.dart';
+import 'package:islamy/quran_tab/Quran.dart';
 import 'package:islamy/quran_tab/sura_page.dart';
-import 'package:islamy/radio.dart';
-import 'package:islamy/settings.dart';
-import 'package:islamy/tasbih.dart';
+import 'package:islamy/radio/radio.dart';
+import 'package:islamy/settings/settings.dart';
+import 'package:islamy/tasbeh/tasbih.dart';
 
 void main() {
   runApp(islamiApp());
@@ -21,14 +23,18 @@ class islamiApp extends StatelessWidget {
       routes: {
         homeScreen.routeName: (context) => homeScreen(),
         Quran.routeName: (context) => Quran(),
-        hadeth.routeName: (context) => hadeth(),
+        Hadeth.routeName: (context) => Hadeth(),
         tasbih.routeName: (context) => tasbih(),
         radio.routeName: (context) => radio(),
         settings.routeName: (context) => settings(),
         suraPage.routeName: (context) => suraPage(),
+        hadethPage.routeName: (context) => hadethPage(),
       },
       theme: MyThemeData.lightTheme,
       darkTheme: MyThemeData.darkTheme,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      locale: Locale('ar'),
     );
   }
 }

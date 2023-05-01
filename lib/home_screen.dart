@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:islamy/Quran.dart';
-import 'package:islamy/hadeth.dart';
-import 'package:islamy/radio.dart';
-import 'package:islamy/settings.dart';
-import 'package:islamy/tasbih.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:islamy/hadeth_tab/hadeth.dart';
+import 'package:islamy/quran_tab/Quran.dart';
+import 'package:islamy/radio/radio.dart';
+import 'package:islamy/settings/settings.dart';
+import 'package:islamy/tasbeh/tasbih.dart';
 
 class homeScreen extends StatefulWidget {
   static const String routeName = 'homeScreen';
@@ -31,7 +32,7 @@ class _homeScreenState extends State<homeScreen> {
             backgroundColor: Colors.transparent,
             elevation: 0,
             title: Text(
-              'Islami',
+              AppLocalizations.of(context)!.app_title,
               style: Theme.of(context).textTheme.headline1,
             ),
             centerTitle: true,
@@ -48,18 +49,19 @@ class _homeScreenState extends State<homeScreen> {
               items: [
                 BottomNavigationBarItem(
                     icon: ImageIcon(AssetImage('assets/image/quran_icon.png')),
-                    label: 'Quran'),
+                    label: AppLocalizations.of(context)!.quran),
                 BottomNavigationBarItem(
                     icon: ImageIcon(AssetImage('assets/image/hadeth_icon.png')),
-                    label: 'hadeth'),
+                    label: AppLocalizations.of(context)!.hadeth),
                 BottomNavigationBarItem(
                     icon: ImageIcon(AssetImage('assets/image/sebha_icon.png')),
-                    label: 'tasbeh'),
+                    label: AppLocalizations.of(context)!.tasbeh),
                 BottomNavigationBarItem(
                     icon: ImageIcon(AssetImage('assets/image/radio_icon.png')),
-                    label: 'radio'),
+                    label: AppLocalizations.of(context)!.radio),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.settings), label: 'Settings'),
+                    icon: Icon(Icons.settings),
+                    label: AppLocalizations.of(context)!.settings),
               ],
             ),
           ),
@@ -71,7 +73,7 @@ class _homeScreenState extends State<homeScreen> {
 
   List<Widget> tabs = [
     Quran(),
-    hadeth(),
+    Hadeth(),
     tasbih(),
     radio(),
     settings(),
