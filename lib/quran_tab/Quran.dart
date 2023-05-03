@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islamy/My_theme.dart';
+import 'package:islamy/provider/app_provider.dart';
 import 'package:islamy/quran_tab/sura%20name.dart';
+import 'package:provider/provider.dart';
 
 class Quran extends StatelessWidget {
   static const String routeName = 'Quran';
@@ -124,28 +126,42 @@ class Quran extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<appProvider>(context);
     return Center(
       child: Column(
         children: [
           Image.asset('assets/image/quran_image.png'),
           Divider(
-            color: MyThemeData.lightPrimary,
+            color: provider.appTheme == ThemeMode.dark
+                ? MyThemeData.amberColor
+                : MyThemeData.lightPrimary,
             thickness: 3,
           ),
           Text(
             AppLocalizations.of(context)!.sura_name,
-            style: TextStyle(
-                color: Colors.black, fontSize: 25, fontWeight: FontWeight.w600),
+            style: provider.appTheme == ThemeMode.dark
+                ? TextStyle(
+                    color: Colors.white,
+                    fontSize: 25,
+                    fontWeight: FontWeight.w600)
+                : TextStyle(
+                    color: Colors.black,
+                    fontSize: 25,
+                    fontWeight: FontWeight.w600),
           ),
           Divider(
-            color: MyThemeData.lightPrimary,
+            color: provider.appTheme == ThemeMode.dark
+                ? MyThemeData.amberColor
+                : MyThemeData.lightPrimary,
             thickness: 3,
           ),
           Expanded(
             child: ListView.separated(
               separatorBuilder: (context, index) {
                 return Divider(
-                  color: MyThemeData.lightPrimary,
+                  color: provider.appTheme == ThemeMode.dark
+                      ? MyThemeData.amberColor
+                      : MyThemeData.lightPrimary,
                   thickness: 2,
                 );
               },

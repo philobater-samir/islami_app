@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:islamy/My_theme.dart';
 import 'package:islamy/hadeth_tab/hadeth.dart';
+import 'package:islamy/provider/app_provider.dart';
 import 'package:islamy/quran_tab/Quran.dart';
 import 'package:islamy/radio/radio.dart';
 import 'package:islamy/settings/settings.dart';
-import 'package:islamy/tasbeh/tasbih.dart';
+import 'package:islamy/tasbeh/sebha.dart';
+import 'package:provider/provider.dart';
 
 class homeScreen extends StatefulWidget {
   static const String routeName = 'homeScreen';
@@ -18,14 +21,23 @@ class _homeScreenState extends State<homeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<appProvider>(context);
+
     return Stack(
       children: [
-        Image.asset(
-          'assets/image/light_background.png',
-          width: double.infinity,
-          height: double.infinity,
-          fit: BoxFit.fill,
-        ),
+        provider.appTheme == ThemeMode.dark
+            ? Image.asset(
+                'assets/image/dark_background.png',
+                width: double.infinity,
+                height: double.infinity,
+                fit: BoxFit.fill,
+              )
+            : Image.asset(
+                'assets/image/light_background.png',
+                width: double.infinity,
+                height: double.infinity,
+                fit: BoxFit.fill,
+              ),
         Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
@@ -33,7 +45,12 @@ class _homeScreenState extends State<homeScreen> {
             elevation: 0,
             title: Text(
               AppLocalizations.of(context)!.app_title,
-              style: Theme.of(context).textTheme.headline1,
+              style: provider.appTheme == ThemeMode.dark
+                  ? TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: MyThemeData.amberColor)
+                  : Theme.of(context).textTheme.headline1,
             ),
             centerTitle: true,
           ),
@@ -74,7 +91,7 @@ class _homeScreenState extends State<homeScreen> {
   List<Widget> tabs = [
     Quran(),
     Hadeth(),
-    tasbih(),
+    sebha(),
     radio(),
     settings(),
   ];

@@ -1,55 +1,76 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islamy/My_theme.dart';
+import 'package:provider/provider.dart';
+
+import '../provider/app_provider.dart';
 
 class LanguageItam extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<appProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: Container(
-        height: 100,
+        height: 120,
         child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'English',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold),
-              ),
-              Icon(
-                Icons.check,
-                color: Colors.black,
-              )
-            ],
-          ),
+          InkWell(
+              onTap: () {
+                provider.changeLanguage('en');
+              },
+              child: provider.appLanguage == 'en'
+                  ? getSelectedItemWidget(AppLocalizations.of(context)!.english)
+                  : getUnSelectedItemWidget(
+                      AppLocalizations.of(context)!.english)),
           SizedBox(
             height: 10,
           ),
           Divider(
             height: 5,
-            color: MyThemeData.lightPrimary,
+            color: provider.appTheme == ThemeMode.dark
+                ? MyThemeData.amberColor
+                : MyThemeData.lightPrimary,
             thickness: 4,
           ),
           SizedBox(
             height: 10,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Arabic',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold),
-              ),
-            ],
-          )
+          InkWell(
+              onTap: () {
+                provider.changeLanguage('ar');
+              },
+              child: provider.appLanguage == 'ar'
+                  ? getSelectedItemWidget(AppLocalizations.of(context)!.arabic)
+                  : getUnSelectedItemWidget(
+                      AppLocalizations.of(context)!.arabic))
         ]),
       ),
+    );
+  }
+
+  Widget getSelectedItemWidget(String text) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          text,
+          style: TextStyle(
+              color: Colors.black, fontSize: 25, fontWeight: FontWeight.bold),
+        ),
+      ],
+    );
+  }
+
+  Widget getUnSelectedItemWidget(String text) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          text,
+          style: TextStyle(
+              color: Colors.black, fontSize: 25, fontWeight: FontWeight.bold),
+        ),
+      ],
     );
   }
 }

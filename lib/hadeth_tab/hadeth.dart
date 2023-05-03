@@ -3,6 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islamy/My_theme.dart';
 import 'package:islamy/hadeth_tab/hadeth_name.dart';
+import 'package:provider/provider.dart';
+
+import '../provider/app_provider.dart';
 
 class Hadeth extends StatefulWidget {
   static const String routeName = 'hadeth';
@@ -16,6 +19,8 @@ class _HadethState extends State<Hadeth> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<appProvider>(context);
+
     if (hadethnum.isEmpty) {
       loadHadethFile();
     }
@@ -25,33 +30,46 @@ class _HadethState extends State<Hadeth> {
         children: [
           Image.asset('assets/image/hadeth_image.png'),
           Divider(
-            color: MyThemeData.lightPrimary,
+            color: provider.appTheme == ThemeMode.dark
+                ? MyThemeData.amberColor
+                : MyThemeData.lightPrimary,
             thickness: 3,
           ),
           Text(
             AppLocalizations.of(context)!.hadeth_name,
-            style: TextStyle(
-                color: Colors.black, fontSize: 25, fontWeight: FontWeight.w600),
+            style: provider.appTheme == ThemeMode.dark
+                ? TextStyle(
+                    color: Colors.white,
+                    fontSize: 25,
+                    fontWeight: FontWeight.w600)
+                : TextStyle(
+                    color: Colors.black,
+                    fontSize: 25,
+                    fontWeight: FontWeight.w600),
           ),
           Divider(
-            color: MyThemeData.lightPrimary,
+            color: provider.appTheme == ThemeMode.dark
+                ? MyThemeData.amberColor
+                : MyThemeData.lightPrimary,
             thickness: 3,
           ),
           Expanded(
             child: hadethnum.isEmpty
                 ? Center(child: CircularProgressIndicator())
                 : ListView.separated(
-                    separatorBuilder: (context, index) {
-                      return Divider(
-                        color: MyThemeData.lightPrimary,
+              separatorBuilder: (context, index) {
+                return Divider(
+                        color: provider.appTheme == ThemeMode.dark
+                            ? MyThemeData.amberColor
+                            : MyThemeData.lightPrimary,
                         thickness: 2,
                       );
-                    },
-                    itemBuilder: (context, index) {
-                      return hadethName(hadeth: hadethnum[index]);
-                    },
-                    itemCount: hadethnum.length,
-                  ),
+              },
+              itemBuilder: (context, index) {
+                return hadethName(hadeth: hadethnum[index]);
+              },
+              itemCount: hadethnum.length,
+            ),
           )
         ],
       ),

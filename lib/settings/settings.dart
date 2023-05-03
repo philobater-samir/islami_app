@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islamy/My_theme.dart';
+import 'package:islamy/provider/app_provider.dart';
 import 'package:islamy/settings/language_item.dart';
 import 'package:islamy/settings/theme_item.dart';
+import 'package:provider/provider.dart';
 
 class settings extends StatefulWidget {
   static const String routeName = 'setting';
@@ -15,6 +17,8 @@ class settings extends StatefulWidget {
 class _settingsState extends State<settings> {
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<appProvider>(context);
+
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: Column(
@@ -27,10 +31,15 @@ class _settingsState extends State<settings> {
                 flex: 1,
                 child: Text(
                   AppLocalizations.of(context)!.language,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
+                  style: provider.appTheme == ThemeMode.dark
+                      ? TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold)
+                      : TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
                 ),
               ),
               Expanded(
@@ -42,14 +51,18 @@ class _settingsState extends State<settings> {
                   child: Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        color: MyThemeData.lightPrimary),
+                        color: provider.appTheme == ThemeMode.dark
+                            ? MyThemeData.amberColor
+                            : MyThemeData.lightPrimary),
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            AppLocalizations.of(context)!.english,
+                            provider.appLanguage == 'en'
+                                ? AppLocalizations.of(context)!.english
+                                : AppLocalizations.of(context)!.arabic,
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 15,
@@ -70,15 +83,19 @@ class _settingsState extends State<settings> {
           Row(
             children: [
               Expanded(
-                flex: 1,
-                child: Text(
-                  AppLocalizations.of(context)!.theme,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
+                  flex: 1,
+                  child: Text(
+                    AppLocalizations.of(context)!.theme,
+                    style: provider.appTheme == ThemeMode.dark
+                        ? TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold)
+                        : TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                  )),
               Expanded(
                 flex: 2,
                 child: InkWell(
@@ -88,14 +105,18 @@ class _settingsState extends State<settings> {
                   child: Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        color: MyThemeData.lightPrimary),
+                        color: provider.appTheme == ThemeMode.dark
+                            ? MyThemeData.amberColor
+                            : MyThemeData.lightPrimary),
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            AppLocalizations.of(context)!.light,
+                            provider.appTheme == ThemeMode.light
+                                ? AppLocalizations.of(context)!.light
+                                : AppLocalizations.of(context)!.dark,
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 15,
