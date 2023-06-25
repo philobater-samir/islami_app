@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islamy/My_theme.dart';
@@ -15,10 +14,11 @@ class settings extends StatefulWidget {
 }
 
 class _settingsState extends State<settings> {
+  late appProvider provider;
+
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<appProvider>(context);
-
+    provider = Provider.of<appProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: Column(
@@ -33,13 +33,13 @@ class _settingsState extends State<settings> {
                   AppLocalizations.of(context)!.language,
                   style: provider.appTheme == ThemeMode.dark
                       ? TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold)
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold)
                       : TextStyle(
-                          color: Colors.black,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
+                      color: Colors.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
               Expanded(
@@ -88,13 +88,13 @@ class _settingsState extends State<settings> {
                     AppLocalizations.of(context)!.theme,
                     style: provider.appTheme == ThemeMode.dark
                         ? TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold)
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold)
                         : TextStyle(
-                            color: Colors.black,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
                   )),
               Expanded(
                 flex: 2,
@@ -138,6 +138,9 @@ class _settingsState extends State<settings> {
 
   void showlanguageItem() {
     showModalBottomSheet(
+        backgroundColor: provider.appTheme == ThemeMode.dark
+            ? MyThemeData.amberColor
+            : MyThemeData.lightPrimary,
         context: context,
         builder: (context) {
           return LanguageItam();
@@ -146,6 +149,9 @@ class _settingsState extends State<settings> {
 
   void showThemeItem() {
     showModalBottomSheet(
+        backgroundColor: provider.appTheme == ThemeMode.dark
+            ? MyThemeData.amberColor
+            : MyThemeData.lightPrimary,
         context: context,
         builder: (context) {
           return themeItem();

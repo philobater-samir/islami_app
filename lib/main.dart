@@ -11,6 +11,7 @@ import 'package:islamy/radio/radio.dart';
 import 'package:islamy/settings/settings.dart';
 import 'package:islamy/tasbeh/sebha.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(ChangeNotifierProvider(
@@ -18,9 +19,12 @@ void main() {
 }
 
 class islamiApp extends StatelessWidget {
+  late appProvider provider;
+
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<appProvider>(context);
+    provider = Provider.of<appProvider>(context);
+    intialSharedPref();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: homeScreen.routeName,
@@ -38,8 +42,20 @@ class islamiApp extends StatelessWidget {
       darkTheme: MyThemeData.darkTheme,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      locale: Locale(provider.appLanguage),
       themeMode: provider.appTheme,
+      locale: Locale(provider.appLanguage),
     );
+  }
+
+  void intialSharedPref() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String newLanguage = prefs.getString('newLanguage') ?? 'en';
+    String? newTheme = prefs.getString('newTheme');
+    provider.changeLanguage(newLanguage);
+    if (newTheme == 'light') {
+      provider.changeTheme(ThemeMode.light);
+    } else if (newTheme == 'dark') {
+      provider.changeTheme(ThemeMode.dark);
+    }
   }
 }
